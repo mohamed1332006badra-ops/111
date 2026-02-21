@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Vocabulary - Unit 7</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Outfit:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0056b3;
+            /* Deep Blue from header */
+            --accent: #ffc107;
+            /* Yellow/Gold from header */
+            --bg-color: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-main: #333;
+            --text-secondary: #666;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Cairo', 'Outfit', sans-serif;
+            /* Cairo for Arabic, Outfit for English */
+            background: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), #003d80);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 86, 179, 0.2);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.5%);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            transform: rotate(45deg);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            margin-top: 5px;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            background: var(--accent);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 30px 0 15px 0;
+            font-weight: 700;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 15px 20px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-right: 5px solid var(--primary);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .word-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .en-word {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-align: left;
+            /* English usually LTR, but in RTL context we force alignment if needed, though flex handles it */
+            direction: ltr;
+        }
+
+        .ar-meaning {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .listen-btn {
+            background: #eef2f6;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary);
+            transition: all 0.2s;
+            flex-shrink: 0;
+            margin-right: 15px;
+            /* Spacing from text */
+        }
+
+        .listen-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .listen-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* Floating Action Button for Auto Play (Optional) */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+            border: none;
+        }
+
+        .fab:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Routines Around the World</h1>
+            <div class="subtitle">Vocabulary Unit 7 - British Pronunciation 🇬🇧</div>
+        </header>
+
+        <!-- Section 1 -->
+        <div class="section-title">1 | Key Vocabulary (المفردات الرئيسية)</div>
+        <div class="grid" id="key-vocab-list"></div>
+
+        <!-- Section 2 -->
+        <div class="section-title">2 | Important Vocabulary (المفردات الهامة)</div>
+        <div class="grid" id="imp-vocab-list"></div>
+
+    </div>
+
+    <!-- Footer Note -->
+    <div style="text-align: center; margin-top: 40px; color: #888; font-size: 0.9rem;">
+        اضغط على أيقونة الأذن للاستماع للنطق البريطاني الصحيح
+    </div>
+
+    <script>
+        // Data derived from the user's image
+        const keyVocabulary = [
+            { en: "bow(ed)", ar: "ينحني - انحناءة", clean: "bow" },
+            { en: "differ(ed)", ar: "يختلف", clean: "differ" },
+            { en: "difference", ar: "فرق - اختلاف" },
+            { en: "energetic", ar: "نشيط" },
+            { en: "fit", ar: "يناسب - يلائم / لياقة" }, // simplified for card
+            { en: "fitness", ar: "لياقة - ملائمة" },
+            { en: "junk food", ar: "طعام غير صحي" },
+            { en: "last up to", ar: "يستمر لمدة ..." },
+            { en: "make a difference", ar: "يحدث فرقا" },
+            { en: "motivate(d)", ar: "يحفز - يشجع", clean: "motivate" },
+            { en: "motivated", ar: "متحمس" },
+            { en: "punctuality", ar: "الانضباط الوقتي" },
+            { en: "refresh(ed)", ar: "ينعش", clean: "refresh" },
+            { en: "refreshing", ar: "منعش" },
+            { en: "respect(ed)", ar: "الاحترام - يحترم", clean: "respect" },
+            { en: "routine", ar: "روتين" },
+            { en: "schedule", ar: "جدول" },
+            { en: "single", ar: "واحد - اعزب" },
+            { en: "stay motivated", ar: "يبقي متحمسا" }
+        ];
+
+        const importantVocabulary = [
+            { en: "affect(ed)", ar: "يؤثر", clean: "affect" },
+            { en: "awesome", ar: "رائع" },
+            { en: "balanced", ar: "متوازن" },
+            { en: "bento", ar: "بنتو (صندوق الغداء)" },
+            { en: "break", ar: "استراحة" },
+            { en: "chorei", ar: "تشوري (اجتماع صباحي)" }, // clean pronunciation for Japanese word might be tricky in EN TTS, but we proceed
+            { en: "climate", ar: "المناخ" },
+            { en: "connected", ar: "متصل" },
+            { en: "croissant", ar: "كرواسون" },
+            { en: "culture", ar: "الثقافة" },
+            { en: "delicious", ar: "لذيذ" },
+            { en: "depend(ed)", ar: "يعتمد", clean: "depend" },
+            { en: "develop(ed)", ar: "يطور - يتطور", clean: "develop" },
+            { en: "effect", ar: "تأثير" },
+            { en: "end(ed)", ar: "ينهي", clean: "end" },
+            { en: "event", ar: "حدث" },
+            { en: "gather(ed)", ar: "يجتمع", clean: "gather" },
+            { en: "ignore(d)", ar: "يهمل - يتجاهل", clean: "ignore" },
+            { en: "mental", ar: "ذهني/عقلي - نفسي" },
+            { en: "midday", ar: "وسط النهار" },
+            { en: "neatly", ar: "بدقة - بترتيب" },
+            { en: "organised", ar: "منظم" },
+            { en: "outdoors", ar: "بالخارج (في الهواء الطلق)" },
+            { en: "physical", ar: "بدني - جسماني" },
+            { en: "politely", ar: "بأدب" },
+            { en: "provide(d)", ar: "يوفر - يزود", clean: "provide" },
+            { en: "record(ed)", ar: "يسجل", clean: "record" },
+            { en: "relaxing", ar: "مريح" },
+            { en: "remind(ed)", ar: "يذكر", clean: "remind" },
+            { en: "reopen(ed)", ar: "يعيد افتتاح", clean: "reopen" },
+            { en: "rhythm", ar: "الإيقاع" },
+            { en: "serve(d)", ar: "يقدم", clean: "serve" },
+            { en: "siesta", ar: "قيلولة" },
+            { en: "similarities", ar: "تشابهات" },
+            { en: "social", ar: "اجتماعي" },
+            { en: "stress", ar: "ضغط" },
+            { en: "teamwork", ar: "عمل جماعي" }
+        ];
+
+        function renderList(list, containerId) {
+            const container = document.getElementById(containerId);
+            list.forEach(item => {
+                const textToSpeak = item.clean || item.en;
+                // Clean punctuation for speech just in case
+                const safeText = textToSpeak.replace(/[()]/g, '');
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <button class="listen-btn" onclick="speak('${safeText}')" title="Listen">
+                         <!-- Ear Icon -->
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C7.58 2 4 5.58 4 10v2.5c0 1.93 1.57 3.5 3.5 3.5H9v2H7.5C5.01 18 3 15.99 3 13.5V10C3 5.03 7.03 1 12 1s9 4.03 9 9v4c0 1.38-1.12 2.5-2.5 2.5H16v-2h2.5c.28 0 .5-.22.5-.5V10c0-4.97-4.03-9-9-9zM9 13H7.5c-.83 0-1.5-.67-1.5-1.5V10h3v3zm7 3h1.5c.83 0 1.5-.67 1.5-1.5V10h-3v6z"/>
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <!-- Inner details to look like an ear -->
+                            <path d="M12 4c3.31 0 6 2.69 6 6v1h-2v-1c0-2.21-1.79-4-4-4s-4 1.79-4 4v3.5h2V10c0-3.31 2.69-6 6-6z" opacity=".3"/> 
+                        </svg>
+                    </button>
+                    <div class="word-info">
+                        <div class="en-word">\${item.en}</div>
+                        <div class="ar-meaning">\${item.ar}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Initialize Speech Synthesis
+        let voices = [];
+
+        function loadVoices() {
+            voices = window.speechSynthesis.getVoices();
+        }
+
+        loadVoices();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+
+            // Try to find a British voice
+            const gbVoice = voices.find(voice => voice.lang === 'en-GB' || voice.name.includes('UK') || voice.name.includes('British'));
+
+            if (gbVoice) {
+                utterance.voice = gbVoice;
+                utterance.lang = 'en-GB';
+            } else {
+                utterance.lang = 'en-GB'; // Fallback
+            }
+
+            utterance.rate = 0.9; // Slightly slower for learning
+            utterance.pitch = 1;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Render sections
+        renderList(keyVocabulary, 'key-vocab-list');
+        renderList(importantVocabulary, 'imp-vocab-list');
+
+    </script>
+</body>
+
+</html>
